@@ -2,7 +2,6 @@ package helpers;
 
 import org.aeonbits.owner.ConfigFactory;
 
-
 public class ConfigHelper {
 
     public static String getURL() {

@@ -1,35 +1,17 @@
 package tests;
 
-import com.codeborne.selenide.Configuration;
-import helpers.ConfigHelper;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
-import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
-import static helpers.AttachmentsHelper.*;
 import static io.qameta.allure.Allure.step;
 
-public class LendingPageTests {
-    private final String SUCCESSFUL_TEXT = "СПАСИБО ЗА ВАШУ ИДЕЮ, ОНА ПОПАДЁТ В СООТВЕТСТВУЮЩЕЕ НАПРАВЛЕНИЕ И МЫ ОБЯЗАТЕЛЬНО РАССМОТРИМ ЕЁ!";
-
-    @BeforeAll
-    static void setup() {
-        addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
-        Configuration.startMaximized = true;
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", true);
-        Configuration.remote = ConfigHelper.getURL();
-        Configuration.browserCapabilities = capabilities;
-    }
+public class LandingPageTests extends TestBase {
 
     @Feature("Test for Sibur Digital")
     @Owner("Pavlov Igor")
@@ -101,15 +83,5 @@ public class LendingPageTests {
         step("Проверить, что поиск выполнился успешно", () -> {
         $(".article-header__title-text").should(visible);
         });
-    }
-
-    @AfterEach
-    public void afterEach() {
-        attachScreenshot("Last screenshot");
-        attachPageSource();
-        attachAsText("Browser console logs", getConsoleLogs());
-        attachVideo();
-
-        closeWebDriver();
     }
 }

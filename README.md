@@ -26,9 +26,9 @@ In the project I've worked with:
 
 * Webdriver (selenuim)
 * Remote webdriver (selenoid)
-* XPath and CSS locators
+* CSS locators
 * Owner properties
 * Jenkins & Selenoid/SauceLabs in docker
 * Design Patterns
 
-Testing The main goal of project was functional and GUI testing which verifies valid work of the tested forms, website's elements and buttons. 
+Testing The main goal of project was functional and GUI testing which verifies valid work of the tested feedback forms, subscriptions, website's elements and buttons. 

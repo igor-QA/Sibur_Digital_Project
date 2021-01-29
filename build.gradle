@@ -56,5 +56,6 @@ tasks.withType(Test) {
 }
 test {
     systemProperty "chromeoptions.args","--disable-notifications" //увидомления выкл
+    systemProperty "chromeoptions.args","--lang=ru" //RU lang
     useJUnitPlatform()
 }

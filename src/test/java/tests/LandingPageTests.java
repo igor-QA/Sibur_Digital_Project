@@ -1,7 +1,9 @@
 package tests;
 
+import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.*;
 
 import static com.codeborne.selenide.Condition.text;
@@ -13,10 +15,13 @@ import static io.qameta.allure.Allure.step;
 
 public class LandingPageTests extends TestBase {
 
-    @Feature("Test for Sibur Digital")
-    @Owner("Pavlov Igor")
     @Test
-    @DisplayName("Проверить успешность отправки сообщения в разделе Идея")
+    @Feature("Test for Sibur.Digital")
+    @Story("Проверить успешность отправки сообщения в разделе Идея")
+    @Epic("Заполнение формы")
+    @Owner("Pavlov Igor")
+    @Tag("ideas")
+    @DisplayName("Заполнение и отправка формы в разделе Идея")
     public void ShouldCheckIdeasPageBlockIdea() {
         step("Открыть страницу и перейти в раздел Ideas", () -> {
             open("https://sibur.digital/ideas");
@@ -33,9 +38,12 @@ public class LandingPageTests extends TestBase {
             $("div.ideas-form__form-container").shouldHave(text(SUCCESSFUL_TEXT));
         });
     }
-
     @Test
-    @DisplayName("Проверить успешность отправки сообщения в разделе Сотрудничество, где имя < 3 символов")
+    @Tag("cooperation")
+    @Feature("Test for Sibur.Digital")
+    @Story("Проверить успешность отправки сообщения в разделе Сотрудничество, где имя < 3 символов")
+    @Epic("Заполнение формы")
+    @DisplayName("Заполнение и отправка формы в разделе Сотрудниество")
     public void ShouldCheckIdeasPageBlockCooperation() {
         step("Открыть сайт и перейти в рздел Сотрудниество", () -> {
             open("https://sibur.digital/ideas");
@@ -54,7 +62,11 @@ public class LandingPageTests extends TestBase {
     }
 
     @Test
-    @DisplayName("Проверить, что пользователь успешно подписался на рассылку")
+    @Tag("distribution")
+    @Feature("Test for Sibur.Digital")
+    @Story("Проверить, что пользователь успешно подписался на рассылку")
+    @Epic("Заполнение раздела - подписка")
+    @DisplayName("Подписка на рассылку")
     public void ShouldCheckSuccessfulSubscription() {
         step("Открыть сайт проскролить вниз и перейти в раздел 'Подписаться на рассылку'", () -> {
             open("https://sibur.digital/about");
@@ -70,7 +82,11 @@ public class LandingPageTests extends TestBase {
         });
     }
     @Test
-    @DisplayName("Проверить успешность поиска по сайту")
+    @Tag("search")
+    @Feature("Test for Sibur.Digital")
+    @Story("Проверить успешность поиска по сайту")
+    @Epic("Выполнение поиска по сайту")
+    @DisplayName("Поиск по сайту")
     public void ShouldCheckSuccessfulSearchInfo() {
         step("Открыть сайт и перейти в раздел поиска по сайту ", () -> {
             open("https://sibur.digital/");

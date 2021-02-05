@@ -16,11 +16,11 @@ import static io.qameta.allure.Allure.step;
 public class LandingPageTests extends TestBase {
 
     @Test
+    @Owner("Pavlov Igor")
+    @Tag("ideas")
     @Feature("Test for Sibur.Digital")
     @Story("Проверить успешность отправки сообщения в разделе Идея")
     @Epic("Заполнение формы")
-    @Owner("Pavlov Igor")
-    @Tag("ideas")
     @DisplayName("Заполнение и отправка формы в разделе Идея")
     public void ShouldCheckIdeasPageBlockIdea() {
         step("Открыть страницу и перейти в раздел Ideas", () -> {
@@ -38,6 +38,7 @@ public class LandingPageTests extends TestBase {
             $("div.ideas-form__form-container").shouldHave(text(SUCCESSFUL_TEXT));
         });
     }
+
     @Test
     @Tag("cooperation")
     @Feature("Test for Sibur.Digital")
@@ -81,6 +82,7 @@ public class LandingPageTests extends TestBase {
             $(".subscribe-popup__success-text").shouldHave(text("ВЫ УСПЕШНО ПОДПИСАЛИСЬ"));
         });
     }
+
     @Test
     @Tag("search")
     @Feature("Test for Sibur.Digital")

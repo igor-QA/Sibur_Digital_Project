@@ -10,6 +10,9 @@ plugins {
 
 group 'qa.guru'
 version '1.0-SNAPSHOT'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 
 repositories {
     maven {url = "https://dl.bintray.com/qameta/maven-unstable/"}
@@ -23,7 +26,6 @@ allure {
     autoconfigure = true // плагин все автоматически сконфигурирует
     aspectjweaver = true
     version = "2.13.6"
-
 
     useJUnit5(){
         version = '2.13.7'
@@ -43,6 +45,8 @@ dependencies {
     testImplementation "com.github.javafaker:javafaker:1.0.2"
     testImplementation "com.codeborne:selenide:5.17.0"
     testImplementation "io.qameta.allure:allure-ee-junit-platform:3.28.2"
+    testImplementation "com.fasterxml.jackson.core:jackson-databind:2.12.1"
+    testImplementation "io.rest-assured:rest-assured:4.3.3"
 
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
     testImplementation "org.junit.jupiter:junit-jupiter-params:${junitVersion}"
@@ -50,11 +54,29 @@ dependencies {
 }
 
 tasks.withType(Test) {
-    systemProperties = System.properties
+    systemProperties += System.properties
     systemProperty "junit.jupiter.extensions.autodetection.enabled", "true"
-}
+
+    if (System.getProperty("threads")) {
+        systemProperties += [
+                'junit.jupiter.execution.parallel.enabled'                 : true,
+                'junit.jupiter.execution.parallel.mode.default'            : 'concurrent',
+                'junit.jupiter.execution.parallel.mode.classes.default'    : 'concurrent',
+                'junit.jupiter.execution.parallel.config.strategy'         : 'fixed',
+                'junit.jupiter.execution.parallel.config.fixed.parallelism': System.getProperty("threads").toInteger()
+        ]
+    }
+
+testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
+
 test {
     systemProperty "chromeoptions.args","--disable-notifications" //увидомления выкл
     systemProperty "chromeoptions.prefs","intl.accept_languages=ru" //RU lang
     useJUnitPlatform()
+     }
 }

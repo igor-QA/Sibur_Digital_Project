@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 
-public class LandingPageTests extends TestBase {
+public class MainPageTests extends TestBase {
 
     @Test
     @Owner("Pavlov Igor")

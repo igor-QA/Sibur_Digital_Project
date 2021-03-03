@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 
-public class MainPageTests extends TestBase {
+public class MainUiPageTests extends TestBase {
 
     @Test
     @Owner("Pavlov Igor")
@@ -99,7 +99,7 @@ public class MainPageTests extends TestBase {
             $(".search__result-item-category").click();
         });
         step("Проверить, что поиск выполнился успешно", () -> {
-        $(".article-header__title-text").should(visible);
+            $(".article-header__title-text").should(visible);
         });
     }
 }

@@ -1,12 +1,15 @@
 package tests;
 
+import annotations.Layer;
 import api.spec.Request;
+import io.qameta.allure.Owner;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
+@Layer("api")
+@Owner("Igor Pavlov")
 public class MainApiPageTests {
 
     @Test
@@ -38,7 +41,7 @@ public class MainApiPageTests {
                 .get("pages")
                 .then()
                 .log().body()
-                .statusCode(200);
-
+                .statusCode(200)
+                .body("media", notNullValue());
     }
 }

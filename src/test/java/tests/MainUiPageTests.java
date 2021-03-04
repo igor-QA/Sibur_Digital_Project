@@ -1,9 +1,8 @@
 package tests;
 
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Owner;
-import io.qameta.allure.Story;
+import annotations.JiraIssue;
+import annotations.Layer;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.*;
 
 import static com.codeborne.selenide.Condition.text;
@@ -13,10 +12,12 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 
+@Layer("web")
+@Owner("Pavlov Igor")
 public class MainUiPageTests extends TestBase {
-
+    
+    @AllureId("#1547")
     @Test
-    @Owner("Pavlov Igor")
     @Tag("ideas")
     @Feature("Test for Sibur.Digital")
     @Story("Проверить успешность отправки сообщения в разделе Идея")
@@ -28,40 +29,43 @@ public class MainUiPageTests extends TestBase {
             $(".page-ideas__type_ideas").click();
         });
         step("Ввести данные в форму обратной связи и нажать отправить", () -> {
-            $("[placeholder='Имя']").setValue("Test").pressTab();
-            $("[placeholder='E-mail']").setValue("test@test.com").pressTab();
-            $("[placeholder='Тема сообщения']").setValue("Attention").pressTab();
-            $("[placeholder='Текст сообщения']").setValue("I have a Lot of Ideas").pressTab();
-            $("[type='submit']").pressEnter();
+            $(name).setValue("Test").pressTab();
+            $(email).setValue("test@test.com").pressTab();
+            $(sub_message).setValue("Attention").pressTab();
+            $(text_message).setValue("I have a Lot of Ideas").pressTab();
+            $(submit).pressEnter();
         });
         step("Проверить, что сообщение успешно отправилось", () -> {
             $("div.ideas-form__form-container").shouldHave(text(SUCCESSFUL_TEXT));
         });
     }
-
+    
+    @AllureId("#1546")
     @Test
     @Tag("cooperation")
-    @Feature("Test for Sibur.Digital")
+    @JiraIssue("QC3-16")
+    @Feature("Negative test for Sibur.Digital")
     @Story("Проверить успешность отправки сообщения в разделе Сотрудничество, где имя < 3 символов")
     @Epic("Заполнение формы")
     @DisplayName("Заполнение и отправка формы в разделе Сотрудниество")
     public void ShouldCheckIdeasPageBlockCooperation() {
-        step("Открыть сайт и перейти в рздел Сотрудниество", () -> {
+        step("Открыть сайт и перейти в раздел Сотрудниество", () -> {
             open("https://sibur.digital/ideas");
             $(".page-ideas__type_coop").click();
         });
         step("Ввести данные в форму обратной связи и нажать отправить", () -> {
-            $("[placeholder='Имя']").setValue("T").pressTab();  /* Некорректное имя */
-            $("[placeholder='E-mail']").setValue("test@hotmail.com").pressTab();
-            $("[placeholder='Тема сообщения']").setValue("Attention").pressTab();
-            $("[placeholder='Текст сообщения']").setValue("I can make the digital world better").pressTab();
-            $("[type='submit']").pressEnter();
+            $(name).setValue("T").pressTab();  /* Некорректное имя */
+            $(email).setValue("test@hotmail.com").pressTab();
+            $(sub_message).setValue("Attention").pressTab();
+            $(text_message).setValue("I can make the digital world better").pressTab();
+            $(submit).pressEnter();
         });
         step("Проверить, что письмо о Сотрудничестве успешно отправилось", () -> {
             $("div.ideas-form__form-container").shouldHave(text(SUCCESSFUL_TEXT));
         });
     }
-
+    
+    @AllureId("#1545")
     @Test
     @Tag("distribution")
     @Feature("Test for Sibur.Digital")
@@ -82,7 +86,8 @@ public class MainUiPageTests extends TestBase {
             $(".subscribe-popup__success-text").shouldHave(text("ВЫ УСПЕШНО ПОДПИСАЛИСЬ"));
         });
     }
-
+    
+    @AllureId("#1548")
     @Test
     @Tag("search")
     @Feature("Test for Sibur.Digital")

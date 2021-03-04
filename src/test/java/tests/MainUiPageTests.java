@@ -15,7 +15,7 @@ import static io.qameta.allure.Allure.step;
 @Layer("web")
 @Owner("Pavlov Igor")
 public class MainUiPageTests extends TestBase {
-    
+
     @AllureId("#1547")
     @Test
     @Tag("ideas")
@@ -23,7 +23,7 @@ public class MainUiPageTests extends TestBase {
     @Story("Проверить успешность отправки сообщения в разделе Идея")
     @Epic("Заполнение формы")
     @DisplayName("Заполнение и отправка формы в разделе Идея")
-    public void ShouldCheckIdeasPageBlockIdea() {
+    public void shouldCheckIdeasPageBlockIdea() {
         step("Открыть страницу и перейти в раздел Ideas", () -> {
             open("https://sibur.digital/ideas");
             $(".page-ideas__type_ideas").click();
@@ -48,7 +48,7 @@ public class MainUiPageTests extends TestBase {
     @Story("Проверить успешность отправки сообщения в разделе Сотрудничество, где имя < 3 символов")
     @Epic("Заполнение формы")
     @DisplayName("Заполнение и отправка формы в разделе Сотрудниество")
-    public void ShouldCheckIdeasPageBlockCooperation() {
+    public void shouldCheckIdeasPageBlockCooperation() {
         step("Открыть сайт и перейти в раздел Сотрудниество", () -> {
             open("https://sibur.digital/ideas");
             $(".page-ideas__type_coop").click();
@@ -72,7 +72,7 @@ public class MainUiPageTests extends TestBase {
     @Story("Проверить, что пользователь успешно подписался на рассылку")
     @Epic("Заполнение раздела - подписка")
     @DisplayName("Подписка на рассылку")
-    public void ShouldCheckSuccessfulSubscription() {
+    public void shouldCheckSuccessfulSubscription() {
         step("Открыть сайт проскролить вниз и перейти в раздел 'Подписаться на рассылку'", () -> {
             open("https://sibur.digital/about");
             $(".subscribe__text").scrollIntoView(true).click();
@@ -94,7 +94,7 @@ public class MainUiPageTests extends TestBase {
     @Story("Проверить успешность поиска по сайту")
     @Epic("Выполнение поиска по сайту")
     @DisplayName("Поиск по сайту")
-    public void ShouldCheckSuccessfulSearchInfo() {
+    public void shouldCheckSuccessfulSearchInfo() {
         step("Открыть сайт и перейти в раздел поиска по сайту ", () -> {
             open("https://sibur.digital/");
             $(".nav__circles").click();

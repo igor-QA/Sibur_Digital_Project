@@ -13,7 +13,6 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
 import static helpers.AttachmentsHelper.*;
 
-
 public class TestBase {
 
     protected final SelenideElement name = $("[placeholder='Имя']"),
@@ -27,19 +26,14 @@ public class TestBase {
     static void setup() {
         addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
         DesiredCapabilities capabilities = new DesiredCapabilities();
+        //Configuration.browser = CustomWebDriver.class.getName();
         Configuration.startMaximized = true;
         Configuration.remote = ConfigHelper.getURL();
         Configuration.browserCapabilities = capabilities;
         capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", true);
-
-        /*if (isEmpty(System.getProperty("selenide.browser"))) {
-            Configuration.browser = "chrome";
-        }
-        if (isRemote()) {
-            Configuration.remote = String.valueOf(getURL());
-        }*/
+        capabilities.setCapability("enableVNC", true);
     }
+
     @AfterEach
     public void afterEach() {
         attachScreenshot("Last screenshot");

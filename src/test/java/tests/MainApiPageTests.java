@@ -26,6 +26,7 @@ public class MainApiPageTests {
                 .statusCode(200)
                 .body("id", notNullValue());
     }
+
     @AllureId("#1819")
     @DisplayName("API запрос на проверку категорий")
     @Test
@@ -38,6 +39,7 @@ public class MainApiPageTests {
                 .statusCode(200)
                 .body("name", notNullValue());
     }
+
     @AllureId("#1820")
     @DisplayName("API запрос на проверку страницы новостей")
     @Test

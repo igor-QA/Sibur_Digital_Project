@@ -26,7 +26,7 @@ public class TestBase {
     static void setup() {
         addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        //Configuration.browser = CustomWebDriver.class.getName();
+        //todo Configuration.browser = CustomWebDriver.class.getName();
         Configuration.startMaximized = true;
         Configuration.remote = ConfigHelper.getURL();
         Configuration.browserCapabilities = capabilities;

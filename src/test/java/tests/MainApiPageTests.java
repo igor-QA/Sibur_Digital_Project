@@ -14,9 +14,9 @@ import static org.hamcrest.Matchers.notNullValue;
 @Owner("Igor Pavlov")
 public class MainApiPageTests {
 
+    @Test
     @AllureId("#1821")
     @DisplayName("API запрос на проверку событий")
-    @Test
     public void checkEvents() {
         given()
                 .spec(Request.spec())
@@ -27,9 +27,9 @@ public class MainApiPageTests {
                 .body("id", notNullValue());
     }
 
+    @Test
     @AllureId("#1819")
     @DisplayName("API запрос на проверку категорий")
-    @Test
     public void checkCategories() {
         given()
                 .spec(Request.spec())
@@ -40,9 +40,9 @@ public class MainApiPageTests {
                 .body("name", notNullValue());
     }
 
+    @Test
     @AllureId("#1820")
     @DisplayName("API запрос на проверку страницы новостей")
-    @Test
     public void checkPages() {
         given()
                 .spec(Request.spec())

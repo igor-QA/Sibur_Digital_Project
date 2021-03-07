@@ -14,9 +14,8 @@ version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-
 repositories {
-    maven { url = "https://dl.bintray.com/qameta/maven-unstable/" }
+    maven {url = "https://dl.bintray.com/qameta/maven-unstable/"}
     mavenCentral()
 }
 ext {
@@ -27,7 +26,6 @@ allure {
     autoconfigure = true // плагин все автоматически сконфигурирует
     aspectjweaver = true
     version = "2.13.6"
-
     useJUnit5() {
         version = '2.13.7'
     }
@@ -70,6 +68,7 @@ tasks.withType(Test) {
 
     testLogging {
         lifecycle {
+            events "passed", "failed"
             events "started", "skipped", "failed", "standard_error", "standard_out"
             exceptionFormat "short"
         }

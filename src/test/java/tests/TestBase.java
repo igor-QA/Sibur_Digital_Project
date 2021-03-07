@@ -1,17 +1,16 @@
 package tests;
 
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
-import helpers.ConfigHelper;
-import io.qameta.allure.selenide.AllureSelenide;
+import io.qameta.allure.junit5.AllureJunit5;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
-import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
+import static config.WebDriverConfigHelper.isVideoOn;
 import static helpers.AttachmentsHelper.*;
+import static helpers.DriverHelper.configureSelenide;
 
 public class TestBase {
 
@@ -19,19 +18,13 @@ public class TestBase {
             email = $("[placeholder='E-mail']"),
             sub_message = $("[placeholder='Тема сообщения']"),
             text_message = $("[placeholder='Текст сообщения']"),
-            submit =  $("[type='submit']");
+            submit = $("[type='submit']");
     protected final String SUCCESSFUL_TEXT = "СПАСИБО ЗА ВАШУ ИДЕЮ, ОНА ПОПАДЁТ В СООТВЕТСТВУЮЩЕЕ НАПРАВЛЕНИЕ И МЫ ОБЯЗАТЕЛЬНО РАССМОТРИМ ЕЁ!";
 
-    @BeforeAll
-    static void setup() {
-        addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        //todo Configuration.browser = CustomWebDriver.class.getName();
-        Configuration.startMaximized = true;
-        Configuration.remote = ConfigHelper.getURL();
-        Configuration.browserCapabilities = capabilities;
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVNC", true);
+    @ExtendWith(AllureJunit5.class)
+    @BeforeEach
+    void setup() {
+        configureSelenide();
     }
 
     @AfterEach
@@ -39,8 +32,7 @@ public class TestBase {
         attachScreenshot("Last screenshot");
         attachPageSource();
         attachAsText("Browser console logs", getConsoleLogs());
-        attachVideo();
-
+        if (isVideoOn()) attachVideo(getSessionId());
         closeWebDriver();
     }
 }

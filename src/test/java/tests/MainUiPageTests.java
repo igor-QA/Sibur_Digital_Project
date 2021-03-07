@@ -16,8 +16,8 @@ import static io.qameta.allure.Allure.step;
 @Owner("Pavlov Igor")
 public class MainUiPageTests extends TestBase {
 
-    @AllureId("#1547")
     @Test
+    @AllureId("#1547")
     @Tag("ideas")
     @Feature("Test for Sibur.Digital")
     @Story("Проверить успешность отправки сообщения в разделе Идея")
@@ -25,7 +25,7 @@ public class MainUiPageTests extends TestBase {
     @DisplayName("Заполнение и отправка формы в разделе Идея")
     public void shouldCheckIdeasPageBlockIdea() {
         step("Открыть страницу и перейти в раздел Ideas", () -> {
-            open("https://sibur.digital/ideas");
+            open("ideas");
             $(".page-ideas__type_ideas").click();
         });
         step("Ввести данные в форму обратной связи и нажать отправить", () -> {
@@ -39,9 +39,9 @@ public class MainUiPageTests extends TestBase {
             $("div.ideas-form__form-container").shouldHave(text(SUCCESSFUL_TEXT));
         });
     }
-    
-    @AllureId("#1546")
+
     @Test
+    @AllureId("#1546")
     @Tag("cooperation")
     @JiraIssue("QC3-16")
     @Feature("Negative test for Sibur.Digital")
@@ -50,7 +50,7 @@ public class MainUiPageTests extends TestBase {
     @DisplayName("Заполнение и отправка формы в разделе Сотрудниество")
     public void shouldCheckIdeasPageBlockCooperation() {
         step("Открыть сайт и перейти в раздел Сотрудниество", () -> {
-            open("https://sibur.digital/ideas");
+            open("ideas");
             $(".page-ideas__type_coop").click();
         });
         step("Ввести данные в форму обратной связи и нажать отправить", () -> {
@@ -64,9 +64,9 @@ public class MainUiPageTests extends TestBase {
             $("div.ideas-form__form-container").shouldHave(text(SUCCESSFUL_TEXT));
         });
     }
-    
-    @AllureId("#1545")
+
     @Test
+    @AllureId("#1545")
     @Tag("distribution")
     @Feature("Test for Sibur.Digital")
     @Story("Проверить, что пользователь успешно подписался на рассылку")
@@ -74,7 +74,7 @@ public class MainUiPageTests extends TestBase {
     @DisplayName("Подписка на рассылку")
     public void shouldCheckSuccessfulSubscription() {
         step("Открыть сайт проскролить вниз и перейти в раздел 'Подписаться на рассылку'", () -> {
-            open("https://sibur.digital/about");
+            open("about");
             $(".subscribe__text").scrollIntoView(true).click();
         });
         step("Ввести почту, согласиться с правилами и подписаться", () -> {
@@ -86,9 +86,9 @@ public class MainUiPageTests extends TestBase {
             $(".subscribe-popup__success-text").shouldHave(text("ВЫ УСПЕШНО ПОДПИСАЛИСЬ"));
         });
     }
-    
-    @AllureId("#1548")
+
     @Test
+    @AllureId("#1548")
     @Tag("search")
     @Feature("Test for Sibur.Digital")
     @Story("Проверить успешность поиска по сайту")
@@ -96,7 +96,7 @@ public class MainUiPageTests extends TestBase {
     @DisplayName("Поиск по сайту")
     public void shouldCheckSuccessfulSearchInfo() {
         step("Открыть сайт и перейти в раздел поиска по сайту ", () -> {
-            open("https://sibur.digital/");
+            open("");
             $(".nav__circles").click();
         });
         step("Ввести данные для поиска, например 'Agile' и выполнить поиск", () -> {

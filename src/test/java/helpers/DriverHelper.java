@@ -13,9 +13,21 @@ public class DriverHelper {
 
         Configuration.browser = CustomWebDriver.class.getName();
         Configuration.baseUrl = "https://sibur.digital/";
-        Configuration.timeout = 10000;
         Configuration.startMaximized = true;
+        Configuration.timeout = 10000;
         //Configuration.browserSize = "1600x1200";
 
     }
 }
+
+/*
+        if (isEmpty(System.getProperty("selenide.browser"))) {
+         Configuration.browser = "chrome";
+         }
+
+         if (isRemote()) {
+         Configuration.remote = String.valueOf(getRemoteUrl());
+         }
+}
+
+ */

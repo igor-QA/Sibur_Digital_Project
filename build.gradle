@@ -56,20 +56,31 @@ tasks.withType(Test) {
     systemProperties += System.properties
     systemProperty "junit.jupiter.extensions.autodetection.enabled", "true"
 
-    if (System.getProperty("threads")) {
+    //if (System.getProperty("threads")) {
         systemProperties += [
                 'junit.jupiter.execution.parallel.enabled'                 : true,
                 'junit.jupiter.execution.parallel.mode.default'            : 'concurrent',
                 'junit.jupiter.execution.parallel.mode.classes.default'    : 'concurrent',
                 'junit.jupiter.execution.parallel.config.strategy'         : 'fixed',
-                'junit.jupiter.execution.parallel.config.fixed.parallelism': System.getProperty("threads").toInteger()
+                //'junit.jupiter.execution.parallel.config.fixed.parallelism': System.getProperty("threads").toInteger()
         ]
-    }
+
+    def threads = System.getProperty("threads")
+        if (threads) {
+            systemProperties += [
+                    'junit.jupiter.execution.parallel.config.fixed.parallelism': threads
+            ]
+        } else {
+            systemProperties += [
+                    'junit.jupiter.execution.parallel.config.fixed.parallelism': 1
+            ]
+        }
 
     testLogging {
         lifecycle {
+            //        events "started", "passed"
             events "started", "skipped", "failed", "standard_error", "standard_out"
-            exceptionFormat "short"
+            //        exceptionFormat "short"
         }
     }
 

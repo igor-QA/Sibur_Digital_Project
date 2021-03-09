@@ -24,4 +24,6 @@ public interface WebDriverConfig extends Config {
     @Key("video")
     Boolean isVideo();
 
+    @Key("web.mobile")
+    String webMobileDevice();
 }

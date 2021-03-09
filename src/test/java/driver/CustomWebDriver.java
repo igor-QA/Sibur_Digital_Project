@@ -13,6 +13,8 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import javax.annotation.Nonnull;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
 import static config.WebDriverConfigHelper.*;
@@ -32,37 +34,29 @@ public class CustomWebDriver implements WebDriverProvider {
             capabilities.setCapability("videoFrameRate", 24);
         }
 
-        if (isRemoteWebDriver()) {
-            switch (getBrowserName()) {
+        switch (getBrowserName()) {
                 case "chrome":
                     capabilities.setCapability(ChromeOptions.CAPABILITY, getChromeOptions());
                     WebDriverManager.chromedriver().setup();
                     break;
                 case "firefox":
                     WebDriverManager.firefoxdriver().setup();
-                    // todo
+                    // todo safari, opera
                     break;
             }
+        if (isRemoteWebDriver()) {
             return getRemoteWebDriver(capabilities);
         } else {
-            return getLocalChromeDriver();
+            return getLocalChromeDriver(capabilities);
         }
     }
-
-    private ChromeDriver getLocalChromeDriver() {
-        WebDriverManager.chromedriver().setup();
-        return new ChromeDriver(getChromeOptions());
-    }
-
-    private WebDriver getRemoteWebDriver(DesiredCapabilities capabilities) {
-        RemoteWebDriver remoteWebDriver = new RemoteWebDriver(getRemoteWebDriverUrl(), capabilities);
-        remoteWebDriver.setFileDetector(new LocalFileDetector());
-
-        return remoteWebDriver;
-    }
-
     private ChromeOptions getChromeOptions() {
         ChromeOptions chromeOptions = new ChromeOptions();
+        if (!getWebMobileDevice().equals("")) {
+            Map<String, Object> mobileDevice = new HashMap<>();
+            mobileDevice.put("deviceName", getWebMobileDevice());
+            chromeOptions.setExperimentalOption("mobileEmulation", mobileDevice);
+        }
         chromeOptions.addArguments("--no-sandbox");
         chromeOptions.addArguments("--disable-notifications");
         chromeOptions.addArguments("--disable-infobars");
@@ -70,6 +64,18 @@ public class CustomWebDriver implements WebDriverProvider {
 //        chromeOptions.addArguments("--headless");
 
         return chromeOptions;
+    }
+
+    @SuppressWarnings("deprecation")
+    private WebDriver getLocalChromeDriver(DesiredCapabilities capabilities) {
+        return new ChromeDriver(capabilities);
+    }
+
+    private WebDriver getRemoteWebDriver(DesiredCapabilities capabilities) {
+        RemoteWebDriver remoteWebDriver = new RemoteWebDriver(getRemoteWebDriverUrl(), capabilities);
+        remoteWebDriver.setFileDetector(new LocalFileDetector());
+
+        return remoteWebDriver;
     }
 
     private URL getRemoteWebDriverUrl() {
@@ -81,10 +87,3 @@ public class CustomWebDriver implements WebDriverProvider {
         return null;
     }
 }
-
-/*if (isEmpty(System.getProperty("selenide.browser"))) {
-            Configuration.browser = "chrome";
-        }
-        if (isRemote()) {
-            Configuration.remote = String.valueOf(getURL());
-}*/

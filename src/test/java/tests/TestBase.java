@@ -12,6 +12,7 @@ import static config.WebDriverConfigHelper.isVideoOn;
 import static helpers.AttachmentsHelper.*;
 import static helpers.DriverHelper.configureSelenide;
 
+@ExtendWith(AllureJunit5.class)
 public class TestBase {
 
     protected final SelenideElement name = $("[placeholder='Имя']"),
@@ -21,10 +22,10 @@ public class TestBase {
             submit = $("[type='submit']");
     protected final String SUCCESSFUL_TEXT = "СПАСИБО ЗА ВАШУ ИДЕЮ, ОНА ПОПАДЁТ В СООТВЕТСТВУЮЩЕЕ НАПРАВЛЕНИЕ И МЫ ОБЯЗАТЕЛЬНО РАССМОТРИМ ЕЁ!";
 
-    @ExtendWith(AllureJunit5.class)
     @BeforeEach
     void setup() {
-        configureSelenide(); }
+        configureSelenide();
+    }
 
     @AfterEach
     public void afterEach() {

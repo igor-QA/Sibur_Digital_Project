@@ -24,8 +24,7 @@ public class TestBase {
     @ExtendWith(AllureJunit5.class)
     @BeforeEach
     void setup() {
-        configureSelenide();
-    }
+        configureSelenide(); }
 
     @AfterEach
     public void afterEach() {

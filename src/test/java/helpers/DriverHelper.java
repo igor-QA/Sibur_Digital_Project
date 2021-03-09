@@ -16,5 +16,6 @@ public class DriverHelper {
         Configuration.timeout = 10000;
         Configuration.startMaximized = true;
         //Configuration.browserSize = "1600x1200";
+
     }
 }

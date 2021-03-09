@@ -68,7 +68,6 @@ tasks.withType(Test) {
 
     testLogging {
         lifecycle {
-            events "passed", "failed"
             events "started", "skipped", "failed", "standard_error", "standard_out"
             exceptionFormat "short"
         }

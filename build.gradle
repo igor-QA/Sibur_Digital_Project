@@ -57,7 +57,7 @@ tasks.withType(Test) {
     systemProperty "junit.jupiter.extensions.autodetection.enabled", "true"
 
     //if (System.getProperty("threads")) {
-        systemProperties += [
+    systemProperties += [
                 'junit.jupiter.execution.parallel.enabled'                 : true,
                 'junit.jupiter.execution.parallel.mode.default'            : 'concurrent',
                 'junit.jupiter.execution.parallel.mode.classes.default'    : 'concurrent',
@@ -72,7 +72,7 @@ tasks.withType(Test) {
             ]
         } else {
             systemProperties += [
-                    'junit.jupiter.execution.parallel.config.fixed.parallelism': 1
+                    'junit.jupiter.execution.parallel.config.fixed.parallelism': 2
             ]
         }
 

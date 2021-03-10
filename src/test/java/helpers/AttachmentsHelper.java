@@ -15,7 +15,6 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static config.WebDriverConfigHelper.getWebVideoStorage;
 
 public class AttachmentsHelper {
-
     @Attachment(value = "{attachName}", type = "text/plain")
     public static String attachAsText(String attachName, String message) {
         return message;
@@ -30,7 +29,6 @@ public class AttachmentsHelper {
     public static byte[] attachPageSource() {
         return getWebDriver().getPageSource().getBytes(StandardCharsets.UTF_8);
     }
-
 
     @Attachment(value = "Video", type = "text/html", fileExtension = ".html")
     public static String attachVideo(String session) {
@@ -58,5 +56,9 @@ public class AttachmentsHelper {
 
     public static String getConsoleLogs() {
         return String.join("\n", Selenide.getWebDriverLogs(LogType.BROWSER));
+    }
+
+    public static void setEnvironmentAllure(String key, String value) {
+        String text = key + "=" + value + "\n";
     }
 }

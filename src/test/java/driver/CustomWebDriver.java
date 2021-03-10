@@ -24,7 +24,7 @@ public class CustomWebDriver implements WebDriverProvider {
     @Nonnull
     @Override
     public WebDriver createDriver(@Nonnull DesiredCapabilities capabilities) {
-        addListener("AllureSelenide", new AllureSelenide().screenshots(false).savePageSource(false));
+        addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
 
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVNC", true);
